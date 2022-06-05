@@ -9,26 +9,48 @@ using namespace std;
 
 int main()
 {
-	// login implementation version1
-	string uname, password,line;
+	//registration -piawork
+	
+	
+	// login implementation version1 
+	string uname, password,line, regUname,regPwd;
+	ofstream ufile;
 	ifstream userFile;
 	bool login = false;
+	char choice;
 	userFile.open("user.txt", ios::in);
-
-
-	cout << "Enter Username: ";
-	cin >> uname;
+	ufile.open("user.txt", ios::app);
+	cout << "\n Enter Registration Details: \n";
+	cout << " Enter Username: ";
+	cin >> regUname;
 	cin.ignore();
-	cout << "Enter Password: ";
-	cin >> password;
-	while (getline(userFile, line))
+	cout << " Enter Password: ";
+	cin >> regPwd;
+	ufile << regUname << " " << regPwd << endl;
+	ufile.close();
+	cout << "\n Do you want to login? (y/n)\n";
+	cin >> choice;
+	if (choice == 'y')
 	{
-		if (line.find(uname) != string::npos && line.find(password) != string::npos)
-			login = true;		
+		cout << " Enter Username: ";
+		cin >> uname;
+		cin.ignore();
+		cout << " Enter Password: ";
+		cin >> password;
+		while (getline(userFile, line))
+		{
+			if (line.find(uname) != string::npos && line.find(password) != string::npos)
+				login = true;
+		}
+		if (login)
+			cout << "\n Login Successful!!";
+		else
+			cout << "\n Wrong username or password!";
+
+		userFile.close();
 	}
-	if (login)
-		cout << "\n Login Successful!!";
 	else
-		cout << "\n Wrong username or password!";
-	userFile.close();
+	{
+		cout << "\n\n Thank you!!";
+	}
 }
