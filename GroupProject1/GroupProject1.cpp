@@ -12,10 +12,11 @@ int main()
 	// implement main menu - piaclass
 	int choice;
 	// login implementation version1
-	string uname, password, line;
+	string uname, password, line, regUname, regPwd;
+	ofstream ufile;
 	ifstream userFile;
 	bool login = false;
-	userFile.open("user.txt", ios::in);
+	
 	do
 	{
 		cout << " Enter 1 for registration"
@@ -25,9 +26,19 @@ int main()
 		switch (choice)
 		{
 				case 1:	
-						
+						ufile.open("user.txt", ios::app);
+						cout << "\n Enter Registration Details: \n";
+						cout << " Enter Username: ";
+						cin >> regUname;
+						cin.ignore();
+						cout << " Enter Password: ";
+						cin >> regPwd;
+						ufile << regUname << " " << regPwd << endl;
+						ufile.close();						
 						break;
 				case 2:
+						login = false;
+						userFile.open("user.txt", ios::in);
 						cout << "Enter Username: ";
 						cin >> uname;
 						cin.ignore();
